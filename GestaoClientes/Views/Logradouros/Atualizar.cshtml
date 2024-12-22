@@ -1,0 +1,45 @@
+﻿@using GestaoClientes.ViewModels
+@model LogradouroViewModel
+
+@{
+    ViewBag.Title = "Editar Logradouro";
+}
+
+<form method="post" asp-action="Atualizar" asp-controller="Logradouros">
+    <input type="hidden" name="IdLogradouro" value="@Model.IdLogradouro" />
+    <input type="hidden" name="IdCliente" value="@Model.IdCliente" />
+
+    <div class="form-group">
+        <h3 style="margin-top: 80px">Editar Logradouro</h3>
+    </div>
+
+    <div class="form-group">
+        <label for="Rua">Rua</label>
+        <input type="text" class="form-control" id="Rua" name="Rua" value="@Model.Rua" required />
+    </div>
+
+    <div class="form-group">
+        <label for="Quadra">Quadra</label>
+        <input type="text" class="form-control" id="Quadra" name="Quadra" value="@Model.Quadra" required />
+    </div>
+
+    <div class="form-group">
+        <label for="Lote">Lote</label>
+        <input type="text" class="form-control" id="Lote" name="Lote" value="@Model.Lote" required />
+    </div>
+
+    <div class="form-group">
+        <label for="Numero">Número</label>
+        <input type="number" class="form-control" id="Numero" name="Numero" value="@Model.Numero" />
+    </div>
+
+    <div class="form-group">
+        <label for="Bairro">Bairro</label>
+        <input type="text" class="form-control" id="Bairro" name="Bairro" value="@Model.Bairro" required />
+    </div>
+
+    <button type="submit" class="btn btn-success">Atualizar</button>
+    <a asp-action="Index" asp-controller="Clientes" class="btn btn-voltar">
+        Voltar
+    </a>
+</form>

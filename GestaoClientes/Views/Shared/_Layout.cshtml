@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title - Gestão Clientes</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" /> <!-- Biblioteca de ícones -->
+    <style>
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1030;
+            background-color: #2f6a4f;
+            color: white;
+        }
+
+        .navbar-brand.titulo {
+            color: #a8d5ba;
+        }
+
+        .navbar-nav .nav-item {
+            margin-left: 20px;
+        }
+
+
+        .btn-bar {
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 25px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+            .btn-bar:hover {
+                background-color: #45a049;
+                transform: translateY(-3px);
+            }
+
+        .btn-bart {
+            color: white !important;
+            border-radius: 25px;
+        }
+
+
+        .linha-separacao {
+            border: 0;
+            border-top: 3px solid #4CAF50;
+            margin: 20px 0;
+        }
+
+
+        .nav-link:hover {
+            color: white !important;
+            border-radius: 10px;
+        }
+
+        .btn-voltar {
+            color: indianred;
+            border-color: indianred;
+            border-width: 3px;
+            border-style: solid;
+        }
+
+        .container-fluid {
+            background-color: #45a049;
+            color: #45a049;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand titulo" href="/">Gestão Clientes</a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+
+                        @if (ViewData["IsClientListView"] != null && (bool)ViewData["IsClientListView"])
+                        {
+                            <li class="nav-item">
+                                <a asp-action="Adicionar" asp-controller="Clientes" class=" btn-bart nav-link">
+                                    <i class="bi bi-person-plus"></i> Adicionar Cliente
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-action="AdicionarLogradouro" asp-controller="Logradouros" class=" btn-bart nav-link">
+                                    <i class="bi bi-house-door"></i> Adicionar Logradouro
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container mt-4">
+        @RenderBody()
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 - Artur Fidelis</p>
+        </div>
+    </footer>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Renderiza a seção Scripts se definida na view -->
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

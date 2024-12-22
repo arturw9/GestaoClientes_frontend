@@ -1,0 +1,65 @@
+﻿@model DetalhesClienteViewModel
+
+@{
+    ViewBag.Title = "Detalhes das logradouras";
+}
+
+@if (Model.Logradouros == null || Model.Logradouros.Count == 0)
+{
+    <h1 style="margin-top: 80px">Nenhum Lougradoura cadastrada para @Model.ClienteNome.</h1>
+    <a asp-action="Index" asp-controller="Clientes" class="btn btn-voltar">
+        Voltar
+    </a>
+}
+else
+{
+    <div class="form-group">
+        <h3 style="margin-top: 80px">Logradouros de @Model.ClienteNome</h3>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Rua</th>
+                <th>Quadra</th>
+                <th>Lote</th>
+                <th>Número</th>
+                <th>Bairro</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var logradouro in Model.Logradouros)
+            {
+                <tr>
+                    <td>@logradouro.Rua</td>
+                    <td>@logradouro.Quadra</td>
+                    <td>@logradouro.Lote</td>
+                    <td>@logradouro.Numero</td>
+                    <td>@logradouro.Bairro</td>
+                    <td>
+                        <a asp-action="Atualizar" asp-controller="Logradouros"
+                           asp-route-id="@logradouro.IdLogradouro"
+                           asp-route-idCliente="@logradouro.IdCliente"
+                           asp-route-rua="@logradouro.Rua"
+                           asp-route-quadra="@logradouro.Quadra"
+                           asp-route-lote="@logradouro.Lote"
+                           asp-route-numero="@logradouro.Numero"
+                           asp-route-bairro="@logradouro.Bairro"
+                           class="btn btn-dark">
+                            Editar
+                        </a>
+
+                        <form asp-action="Remover" asp-controller="Logradouros" method="post" class="d-inline" onsubmit="return confirm('Tem certeza que deseja deletar este logradouro?');">
+                            <input type="hidden" name="idLogradouro" value="@logradouro.IdLogradouro" />
+                            <input type="hidden" name="idCliente" value="@logradouro.IdCliente" />
+                            <button type="submit" class="btn btn-danger">Deletar</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+            <a asp-action="Index" asp-controller="Clientes" class="btn btn-voltar">
+                Voltar
+            </a>
+        </tbody>
+    </table>
+}

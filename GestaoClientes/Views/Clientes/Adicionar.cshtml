@@ -1,0 +1,118 @@
+﻿@model GestaoClientes.ViewModels.ClienteViewModel
+
+@{
+    ViewBag.Title = "Adicionar Cliente";
+}
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+<form asp-action="Inserir" asp-controller="Clientes" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <h3 style="margin-top: 80px">Cliente</h3>
+    </div>
+    <div class="form-group">
+        <label for="Nome">Nome</label>
+        <input type="text" class="form-control" id="Nome" name="Nome" value="@Model?.Nome" required />
+    </div>
+
+    <div class="form-group">
+        <label for="Email">E-mail</label>
+        <input type="email" class="form-control" id="Email" name="Email" value="@Model?.Email" required />
+        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label for="LogotipoFile">Logotipo</label>
+        <input type="file" class="form-control" id="LogotipoFile" name="LogotipoFile" accept="image/*" />
+    </div>
+
+    <div class="form-group">
+        <h3>Logradouros</h3>
+    </div>
+    <div id="logradouros-container">
+        <div class="logradouro-item">
+            <div class="form-group">
+                <label for="Logradouros[0].Rua">Rua</label>
+                <input type="text" class="form-control" id="Logradouros[0].Rua" name="Logradouros[0].Rua" required />
+            </div>
+
+            <div class="form-group">
+                <label for="Logradouros[0].Quadra">Quadra</label>
+                <input type="text" class="form-control" id="Logradouros[0].Quadra" name="Logradouros[0].Quadra" required />
+            </div>
+
+            <div class="form-group">
+                <label for="Logradouros[0].Lote">Lote</label>
+                <input type="text" class="form-control" id="Logradouros[0].Lote" name="Logradouros[0].Lote" required />
+            </div>
+
+            <div class="form-group">
+                <label for="Logradouros[0].Numero">Número</label>
+                <input type="number" class="form-control" id="Logradouros[0].Numero" name="Logradouros[0].Numero" />
+            </div>
+
+            <div class="form-group">
+                <label for="Logradouros[0].Bairro">Bairro</label>
+                <input type="text" class="form-control" id="Logradouros[0].Bairro" name="Logradouros[0].Bairro" required />
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <button type="submit" class="btn btn-success">Salvar Cliente</button>
+        <button type="button" id="add-logradouro" class="btn btn-secondary">Adicionar Logradouro</button>
+        <a asp-action="Index" class="btn btn-voltar">Voltar</a>
+    </div>
+</form>
+
+@section Scripts {
+    <script>
+        let logradouroIndex = 1;
+
+        document.getElementById('add-logradouro').addEventListener('click', function () {
+            const container = document.getElementById('logradouros-container');
+            const newLogradouro = document.createElement('div');
+            newLogradouro.classList.add('logradouro-item');
+
+            // Adiciona a linha de separação somente se já houver outros logradouros
+            let linhaSeparacao = '';
+            if (logradouroIndex > 0) {
+                linhaSeparacao = '<hr class="linha-separacao" />';
+            }
+
+            newLogradouro.innerHTML = `
+                ${linhaSeparacao}
+                <div class="form-group">
+                    <label for="Logradouros[${logradouroIndex}].Rua">Rua</label>
+                    <input type="text" class="form-control" id="Logradouros[${logradouroIndex}].Rua" name="Logradouros[${logradouroIndex}].Rua" required />
+                </div>
+                <div class="form-group">
+                    <label for="Logradouros[${logradouroIndex}].Quadra">Quadra</label>
+                    <input type="text" class="form-control" id="Logradouros[${logradouroIndex}].Quadra" name="Logradouros[${logradouroIndex}].Quadra" required />
+                </div>
+                <div class="form-group">
+                    <label for="Logradouros[${logradouroIndex}].Lote">Lote</label>
+                    <input type="text" class="form-control" id="Logradouros[${logradouroIndex}].Lote" name="Logradouros[${logradouroIndex}].Lote" required />
+                </div>
+                <div class="form-group">
+                    <label for="Logradouros[${logradouroIndex}].Numero">Número</label>
+                    <input type="number" class="form-control" id="Logradouros[${logradouroIndex}].Numero" name="Logradouros[${logradouroIndex}].Numero" />
+                </div>
+                <div class="form-group">
+                    <label for="Logradouros[${logradouroIndex}].Bairro">Bairro</label>
+                    <input type="text" class="form-control" id="Logradouros[${logradouroIndex}].Bairro" name="Logradouros[${logradouroIndex}].Bairro" required />
+                </div>
+                        <button type="button" class="btn btn-danger delete-logradouro" style="margin: 40px 0 20px 0;">Excluir Logradouro</button>
+            `;
+            container.appendChild(newLogradouro);
+            logradouroIndex++;
+        });
+
+        // Deletar logradouro
+        document.getElementById('logradouros-container').addEventListener('click', function (event) {
+            if (event.target.classList.contains('delete-logradouro')) {
+                const logradouroItem = event.target.closest('.logradouro-item');
+                logradouroItem.remove();
+            }
+        });
+    </script>
+}
