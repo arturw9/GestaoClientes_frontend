@@ -20,6 +20,8 @@ Caso haja alteração nas chaves de login em um dos projetos, é necessário apl
 
 Ao rodar os dois projetos simultaneamente, não é necessário inserir as chaves de acesso no back-end, pois os valores serão enviados pelo front-end. Apenas certifique-se de que as chaves de acesso nos arquivos appsettings de ambos os projetos sejam idênticas. Dessa forma, será possível utilizar as funcionalidades do projeto de forma plena e sem restrições.
 
+Após clonar o projeto, acesse o app Visual Studio, abra os projetos/soluções e clique nos icones de "Debug" para rodar o projeto.
+
 Segue exemplos de comandos que usei para criar as procedures de Clientes e Logradouras:
 
 ----------------------CLIENTES------------------------------------
