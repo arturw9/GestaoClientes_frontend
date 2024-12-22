@@ -23,6 +23,7 @@
     <div class="form-group">
         <label for="LogotipoFile">Logotipo</label>
         <input type="file" class="form-control" id="LogotipoFile" name="LogotipoFile" accept="image/*" />
+        @Html.ValidationMessageFor(model => model.LogotipoFile, "", new { @class = "text-danger" })
     </div>
 
     <div class="form-group">

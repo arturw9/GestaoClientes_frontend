@@ -90,6 +90,12 @@ namespace GestaoClientes.Controllers
         {
             try
             {
+                if (cliente.LogotipoFile == null && cliente.Logotipo == null)
+                {
+                    ModelState.AddModelError("LogotipoFile", "Informe a Logotipo do cliente");
+
+                    return View("Adicionar", cliente);
+                }
                 var token = HttpContext.Session.GetString("AuthToken"); // Obtém o token de Session
 
                 if (cliente.LogotipoFile != null && cliente.LogotipoFile.Length > 0)
@@ -170,8 +176,7 @@ namespace GestaoClientes.Controllers
             using (HttpClient client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token); // Adiciona o token no cabeçalho
-
-                HttpResponseMessage response = await client.GetAsync($"{_configuration["Jwt:Url"].ToString()}Visualizar?email={email}");
+                HttpResponseMessage response = await client.GetAsync($"{_configuration["Jwt:Url"].ToString()}Clientes/Visualizar?email={email}");
                 if (response.IsSuccessStatusCode)
                 {
                     string responseData = await response.Content.ReadAsStringAsync();
