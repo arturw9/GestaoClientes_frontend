@@ -5,41 +5,50 @@
     ViewBag.Title = "Editar Logradouro";
 }
 
-<form method="post" asp-action="Atualizar" asp-controller="Logradouros">
-    <input type="hidden" name="IdLogradouro" value="@Model.IdLogradouro" />
-    <input type="hidden" name="IdCliente" value="@Model.IdCliente" />
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">Editar Logradouro</h3>
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-action="Atualizar" asp-controller="Logradouros">
+                        <input type="hidden" name="IdLogradouro" value="@Model.IdLogradouro" />
+                        <input type="hidden" name="IdCliente" value="@Model.IdCliente" />
 
-    <div class="form-group">
-        <h3 style="margin-top: 80px">Editar Logradouro</h3>
+                        <div class="mb-3">
+                            <label for="Rua" class="form-label">Rua</label>
+                            <input type="text" class="form-control" id="Rua" name="Rua" value="@Model.Rua" required />
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="Quadra" class="form-label">Quadra</label>
+                            <input type="text" class="form-control" id="Quadra" name="Quadra" value="@Model.Quadra" required />
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="Lote" class="form-label">Lote</label>
+                            <input type="text" class="form-control" id="Lote" name="Lote" value="@Model.Lote" required />
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="Numero" class="form-label">Número</label>
+                            <input type="number" class="form-control" id="Numero" name="Numero" value="@Model.Numero" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="Bairro" class="form-label">Bairro</label>
+                            <input type="text" class="form-control" id="Bairro" name="Bairro" value="@Model.Bairro" required />
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <button type="submit" class="btn btn-success">Atualizar</button>
+                            <a asp-action="Index" asp-controller="Clientes" class="btn btn-secondary">Voltar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="form-group">
-        <label for="Rua">Rua</label>
-        <input type="text" class="form-control" id="Rua" name="Rua" value="@Model.Rua" required />
-    </div>
-
-    <div class="form-group">
-        <label for="Quadra">Quadra</label>
-        <input type="text" class="form-control" id="Quadra" name="Quadra" value="@Model.Quadra" required />
-    </div>
-
-    <div class="form-group">
-        <label for="Lote">Lote</label>
-        <input type="text" class="form-control" id="Lote" name="Lote" value="@Model.Lote" required />
-    </div>
-
-    <div class="form-group">
-        <label for="Numero">Número</label>
-        <input type="number" class="form-control" id="Numero" name="Numero" value="@Model.Numero" />
-    </div>
-
-    <div class="form-group">
-        <label for="Bairro">Bairro</label>
-        <input type="text" class="form-control" id="Bairro" name="Bairro" value="@Model.Bairro" required />
-    </div>
-
-    <button type="submit" class="btn btn-success">Atualizar</button>
-    <a asp-action="Index" asp-controller="Clientes" class="btn btn-voltar">
-        Voltar
-    </a>
-</form>
+</div>

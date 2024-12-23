@@ -5,48 +5,52 @@
     ViewBag.Title = "Adicionar Logradouro";
 }
 
-<form asp-action="InserirLogradouro" asp-controller="Logradouros" method="post">
-    <div class="form-group">
-        <h3 style="margin-top: 80px">Adicionar Logradouro</h3>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-success text-white">
+                    <h3 class="mb-0">Adicionar Logradouro</h3>
+                </div>
+                <div class="card-body">
+                    <form asp-action="InserirLogradouro" asp-controller="Logradouros" method="post">
+                        <div class="mb-3">
+                            <label for="Cliente" class="form-label">Selecione o Cliente</label>
+                            <select id="Cliente" name="IdCliente" class="form-select" required>
+                                <option value="" disabled selected>Selecione um cliente</option>
+                                @foreach (var cliente in ViewBag.Clientes as List<Cliente>)
+                                {
+                                    <option value="@cliente.Id">@cliente.Nome</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="Rua" class="form-label">Rua</label>
+                            <input type="text" id="Rua" name="Rua" class="form-control" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="Quadra" class="form-label">Quadra</label>
+                            <input type="text" id="Quadra" name="Quadra" class="form-control" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="Lote" class="form-label">Lote</label>
+                            <input type="text" id="Lote" name="Lote" class="form-control" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="Numero" class="form-label">Número</label>
+                            <input type="number" id="Numero" name="Numero" class="form-control" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="Bairro" class="form-label">Bairro</label>
+                            <input type="text" id="Bairro" name="Bairro" class="form-control" required />
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <button type="submit" class="btn btn-success">Adicionar Logradouro</button>
+                            <a asp-action="Index" asp-controller="Clientes" class="btn btn-secondary">Voltar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="form-group">
-        <label for="Cliente">Selecione o Cliente</label>
-        <select id="Cliente" name="IdCliente" class="form-control" required>
-            <option value="" disabled selected>Selecione um cliente</option>
-            @foreach (var cliente in ViewBag.Clientes as List<Cliente>)
-            {
-                <option value="@cliente.Id">@cliente.Nome</option>
-            }
-        </select>
-    </div>
-
-    <div class="form-group">
-        <label for="Rua">Rua</label>
-        <input type="text" id="Rua" name="Rua" class="form-control" required />
-    </div>
-
-    <div class="form-group">
-        <label for="Quadra">Quadra</label>
-        <input type="text" id="Quadra" name="Quadra" class="form-control" required />
-    </div>
-
-    <div class="form-group">
-        <label for="Lote">Lote</label>
-        <input type="text" id="Lote" name="Lote" class="form-control" required />
-    </div>
-
-    <div class="form-group">
-        <label for="Numero">Número</label>
-        <input type="number" id="Numero" name="Numero" class="form-control" />
-    </div>
-
-    <div class="form-group">
-        <label for="Bairro">Bairro</label>
-        <input type="text" id="Bairro" name="Bairro" class="form-control" required />
-    </div>
-
-    <button type="submit" class="btn btn-success">Adicionar Logradouro</button>
-    <a asp-action="Index" asp-controller="Clientes" class="btn btn-voltar">
-        Voltar
-    </a>
-</form>
+</div>
